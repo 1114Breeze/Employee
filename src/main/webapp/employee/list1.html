@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:https="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="../js/jquery-2.1.0.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <style type="text/css">
+        td,th{
+            text-align: center;
+        }
+    </style>
+    <script src="../js/vuejs-2.5.16.js"></script>
+    <script src="../js/axios-0.18.0.js"></script>
+</head>
+<body>
+<div class="container" id="app">
+    <div class="jumbotron" align="center"><h3>信息显示</h3></div>
+    <table border="1" class="table table-bordered table-hover">
+        <tr class="success">
+            <th>姓名</th>
+            <th>工号</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>电话号</th>
+            <th>密码</th>
+            <th>创建时间</th>
+            <th>最后修改时间</th>
+            <th>操作</th>
+        </tr>
+        <!--v-for绑定用户集合-->
+        <tr v-for="employee" >
+            <td v-text="employee.name"></td>
+            <td v-text="employee.sid"></td>
+            <td v-text="employee.age"></td>
+            <td v-text="employee.sex"></td>
+            <td v-text="employee.tel"></td>
+            <td v-text="employee.spwd"></td>
+            <td>{{employee.s_create | msgDateFormat('yyyy-mm-dd')}}</td>
+            <td>{{employee.s_modified | msgDateFormat('yyyy-mm-dd hh:mi:ss')}}</td>
+            <td>
+                <a class="btn btn-default btn-sm" :href="'/aweb_war_exploded/employee/update.html?id='+employee.u_id">修改</a>
+                <a class="btn btn-default btn-sm" href="javascript:;" @click="deleteEmployee(employee.sid,employee.u_id)">删除</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<script>
+    var vue=new Vue({
+        el:"#app",//找容器
+        data:{
+            //数据源
+            employee:[],
+        },
+        methods:{
+            findBySid(){
+                // alert("哈哈，我是更新页面"+id);
+                //异步传输
+                axios.post("/aweb_war_exploded/EmployeeServlet?action=findBySid").then(response=>{
+                    if (response.data.flag){
+                        this.employee=response.data.data;
+                    }else {
+                        alert(response.data.errorMsg);
+                    }
+                })
+            },
+            deleteEmployee(name,id){
+                // if (confirm("你确定要删除\""+name+"\"吗")){
+                if (confirm("你确定要删除"+"'"+name+"'"+"吗")){
+                    axios.post("/aweb_war_exploded/EmployeeServlet?action=delete&id="+id).then(response=>{
+                        if (response.data.flag){
+                            location.href="register.html"
+                        }else {
+                            alert(response.data.errorMsg);
+                        }
+                    })
+                }
+            },
+        },
+        filters:{
+        msgDateFormat:function (msg,pattern='') {
+            var mt=new Date(msg);
+            var y=mt.getFullYear();
+            var m=(mt.getMonth()+1).toString().padStart(2,"0");
+            var d=mt.getDate();
+            if (pattern=='yyyy-mm-dd'){
+                return y+"-"+m+"-"+d;
+            }
+            var h=mt.getHours().toString().padStart(2,"0");
+            var mi=mt.getMinutes().toString().padStart(2,"0");
+            var s=mt.getSeconds().toString().padStart(2,"0");
+            return y+"-"+m+"-"+d+" "+h+":"+mi+":"+s;
+        }
+    },
+    created(){//勾子函数：用于自动执行
+        this.findBySid()
+    }
+    });
+</script>
+</body>
+</html>

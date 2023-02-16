@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="icon" href="../static/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="../static/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="stylesheet" href="../lib/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-admin.min.css">
+    <title>员工管理系统</title>
+</head>
+<body>
+
+<!--头部导航-->
+<ul class="bsa-header">
+    <!--   移动端侧边栏toggler(不可删除) -->
+    <li>
+        <div class="bsa-nav-item bsa-mobile-sidebar-toggler-item">
+            <i class="bi bi-list"></i>
+        </div>
+    </li>
+    <!--  搜索框表单部分  -->
+    <!--  空白占位符(可以让.bsa-header-item左右分布)   -->
+    <li class="bsa-spacer"></li>
+    <!--  移动端显示的搜索按钮(和搜索框是配套使用)      -->
+    <li>
+        <div class="bsa-nav-item bsa-mobile-search-toggler-item">
+            <i class="bi bi-search"></i>
+        </div>
+    </li>
+    <!--    用户信息    -->
+    <li class="dropdown">
+        <div class="bsa-nav-item" data-bs-toggle="dropdown" class="container" id="app1">
+            <div class="d-flex align-items-center mb-2">
+                <img src="https://temp.im/120x120" class="bsa-height-40 bsa-width-40 rounded-circle" alt="用户头像">
+                <div class="flex-shrink-0 ms-2 bsa-max-width-150 bsa-user-details">
+                    <div class="bsa-font-15 bsa-ellipsis">{{employee.name}}</div>
+                    <div class="bsa-font-13 bsa-ellipsis">{{employee.position}}</div>
+                </div>
+            </div>
+        </div>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="javascript:"><i class="bi bi-person me-2"></i>个人资料</a></li>
+            <li><a class="dropdown-item" href="javascript:"><i class="bi bi-gear me-2"></i>设置</a></li>
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+            <li><a href="/aweb_war_exploded/EmployeeServlet?action=loginout" ><i class="bi bi-box-arrow-right me-2"></i>退出登录</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+<!--侧边栏-->
+<div class="bsa-sidebar">
+    <div class="bsa-sidebar-header">
+        <img src="../static/images/logo-icon.png" class="bsa-logo-icon" alt="logo-icon">
+        <div class="bsa-logo-text">员工管理系统</div>
+    </div>
+    <div class="bsa-sidebar-body">
+        <ul class="bsa-menu">
+            <li>
+                <a href="announcement.html" class="active">
+                    <i class="bi bi-house"></i>公告
+                </a>
+            </li>
+            <li>
+                <a href="list.html">
+                    <i class="bi bi-filetype-html"></i>我的信息
+                </a>
+                <ul>
+                    <li>
+                        <a href="list.html">我的信息</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="salary.html">
+                    <i class="bi bi-filetype-html"></i>我的工资
+                </a>
+                <ul>
+                    <li>
+                        <a href="salary.html">工资信息</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="attendance.html">
+                    <i class="bi bi-filetype-html"></i>出勤信息
+                </a>
+                <ul>
+                    <li>
+                        <a href="attendance.html">出勤信息</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:" class="has-children">
+                    <i class="bi bi-filetype-html"></i>请假管理
+                </a>
+                <ul>
+                    <li>
+                        <a href="leave.html">我的请假</a>
+                    </li>
+                    <li>
+                        <a href="leaveapply.html">请假申请</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:" class="has-children">
+                    <i class="bi bi-list-nested"></i>多级菜单
+                </a>
+                <ul>
+                    <li><a href="javascript:">一级菜单</a></li>
+                    <li>
+                        <a href="javascript:" class="has-children">一级菜单</a>
+                        <ul>
+                            <li><a href="javascript:">二级菜单</a></li>
+                            <li>
+                                <a href="javascript:" class="has-children">二级菜单</a>
+                                <ul>
+                                    <li><a href="javascript:">三级菜单</a></li>
+                                    <li>
+                                        <a href="javascript:" class="has-children">三级菜单</a>
+                                        <ul>
+                                            <li><a href="javascript:">四级菜单</a></li>
+                                            <li><a href="javascript:">四级菜单</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:" class="has-children">一级菜单</a>
+                        <ul>
+                            <li><a href="javascript:">二级菜单</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="bsa-main-wrapper">
+    <div class="bsa-main-content">
+        <!-- 内容都应该被包裹在此-->
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <h5 class="card-title">请假申请</h5>
+                <form class="form-horizontal " role="form"  action="/aweb_war_exploded/EmployeeServlet?action=addLeave" method="post" onsubmit="return chk()">
+                    <div class="form-group">
+                        <label for="cause" class="col-sm-2 control-label">请假原因</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="cause" id="cause" placeholder="请输入请假原因" onfocus="checkcause()" onblur="checkcause()">
+                            <div id="msg4" style="color: red;visibility: hidden">请假原因不能为空</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="time1" class="col-sm-2 control-label">请假时间(开始)</label>
+                        <div class="col-sm-10">
+                            <input type="datetime-local" class="form-control" name="time1" id="time1" onfocus="checktime1()" onblur="checktime1()">
+                            <div id="msg5" style="color: red;visibility: hidden">请选择时间</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="time2" class="col-sm-2 control-label">请假时间(结束)</label>
+                        <div class="col-sm-10">
+                            <input type="datetime-local" class="form-control" name="time2" id="time2"onfocus="checktime2()" onblur="checktime2()">
+                            <div id="msg6" style="color: red;visibility: hidden">请选择时间</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../static/js/bootstrap.bundle.min.js"></script>
+<script src="../static/js/bootstrap-admin.min.js"></script>
+<script src="../lib/chart.js/dist/chart.min.js"></script>
+<script src="../js/vuejs-2.5.16.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+<script>
+    var vue=new Vue({
+        el:"#app1",//找容器
+        data:{
+            //数据源
+            employee:[],
+        },
+        methods:{
+            findBySid(){
+                // alert("哈哈，我是更新页面"+id);
+                //异步传输
+                axios.post("/aweb_war_exploded/EmployeeServlet?action=findBySid").then(response=>{
+                    if (response.data.flag){
+                        this.employee=response.data.data;
+                    }else {
+                        alert(response.data.errorMsg);
+                        location.href="login.html"
+                    }
+                })
+            },
+        },
+        created(){//勾子函数：用于自动执行
+            this.findBySid()
+        }
+    });
+</script>
+<script>
+    function chk() {
+        if (checkcause()&&checktime1()&&checktime2()){
+            return true
+        }else {
+            return false
+        }
+    }
+    function checksid() {
+        var str=document.getElementById("sid").value;
+        if (str.length==0){
+            document.getElementById("msg1").style.visibility="visible";//显示
+            return false
+        }
+        else {
+            document.getElementById("msg1").style.visibility="hidden";//隐藏
+            return true
+        }
+    }
+    function checkname() {
+        var str=document.getElementById("name").value;
+        if (str.length==0){
+            document.getElementById("msg10").style.visibility="visible";//显示
+            return false
+        }
+        else {
+            document.getElementById("msg10").style.visibility="hidden";//隐藏
+            return true
+        }
+    }
+    function checkcause() {
+        var str=document.getElementById("cause").value;
+        if (str.length==0){
+            document.getElementById("msg4").style.visibility="visible";//显示
+            return false
+        }
+        else {
+            document.getElementById("msg4").style.visibility="hidden";//隐藏
+            return true
+        }
+    }
+    function checktime1() {
+        var str=document.getElementById("time1").value;
+        if (str.length==0){
+            document.getElementById("msg5").style.visibility="visible";//显示
+            return false
+        }
+        else {
+            document.getElementById("msg5").style.visibility="hidden";//隐藏
+            return true
+        }
+    }
+    function checktime2() {
+        var str=document.getElementById("time2").value;
+        if (str.length==0){
+            document.getElementById("msg6").style.visibility="visible";//显示
+            return false
+        }
+        else {
+            document.getElementById("msg6").style.visibility="hidden";//隐藏
+            return true
+        }
+    }
+    function checkpwd() {
+        var pwd1=document.getElementById("spwd1").value;
+        var pwd2=document.getElementById("spwd2").value;
+        if (pwd1.length>6){
+            document.getElementById("msg2").style.visibility="hidden";
+            if (pwd1!=pwd2){
+                document.getElementById("msg3").style.visibility="visible";//显示
+                return false
+            }
+            else {
+                document.getElementById("msg3").style.visibility="hidden";//隐藏
+                return true
+            }
+        }
+        else {
+            document.getElementById("msg2").style.visibility="visible";
+        }
+    }
+    function checkemail() {
+        var re=/^\w+@[0-9a-z]+\.[a-z]+$/;
+        var mail =document.getElementById("useremail");
+        if (re.test(mail.value)){
+            document.getElementById("msg4").style.visibility="hidden";
+            return true
+        }
+        else {
+            document.getElementById("msg4").style.visibility="visible";
+            return false
+        }
+    }
+</script>
+</body>
+</html>

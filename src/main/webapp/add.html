@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="icon" href="static/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="static/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="stylesheet" href="lib/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/bootstrap-admin.min.css">
+    <title>员工管理系统</title>
+</head>
+<body>
+
+<!--头部导航-->
+<ul class="bsa-header">
+    <!--   移动端侧边栏toggler(不可删除) -->
+    <li>
+        <div class="bsa-nav-item bsa-mobile-sidebar-toggler-item">
+            <i class="bi bi-list"></i>
+        </div>
+    </li>
+    <!--  搜索框表单部分  -->
+    <!--  空白占位符(可以让.bsa-header-item左右分布)   -->
+    <li class="bsa-spacer"></li>
+    <!--  移动端显示的搜索按钮(和搜索框是配套使用)      -->
+    <li>
+        <div class="bsa-nav-item bsa-mobile-search-toggler-item">
+            <i class="bi bi-search"></i>
+        </div>
+    </li>
+    <!--    用户信息    -->
+    <li class="dropdown">
+        <div class="bsa-nav-item" data-bs-toggle="dropdown">
+            <div class="d-flex align-items-center mb-2">
+                <img src="https://temp.im/120x120" class="bsa-height-40 bsa-width-40 rounded-circle" alt="用户头像">
+                <div class="flex-shrink-0 ms-2 bsa-max-width-150 bsa-user-details">
+                    <div class="bsa-font-15 bsa-ellipsis">忆陌</div>
+                    <div class="bsa-font-13 bsa-ellipsis">超级管理员</div>
+                </div>
+            </div>
+        </div>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="javascript:"><i class="bi bi-person me-2"></i>个人资料</a></li>
+            <li><a class="dropdown-item" href="javascript:"><i class="bi bi-gear me-2"></i>设置</a></li>
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+            <li><a href="/aweb_war_exploded/DuserServlet?action=loginout" ><i class="bi bi-box-arrow-right me-2"></i>退出登录</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+<!--侧边栏-->
+<div class="bsa-sidebar">
+    <div class="bsa-sidebar-header">
+        <img src="static/images/logo-icon.png" class="bsa-logo-icon" alt="logo-icon">
+        <div class="bsa-logo-text">员工管理系统</div>
+    </div>
+    <div class="bsa-sidebar-body">
+        <ul class="bsa-menu">
+            <li>
+                <a href="javascript:" class="has-children">
+                    <i class="bi bi-filetype-html"></i>公告管理
+                </a>
+                <ul>
+                    <li>
+                        <a href="announcement.html">公告列表</a>
+                    </li>
+                    <li>
+                        <a href="addannouncement.html">新增公告</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:" class="has-children">
+                    <i class="bi bi-filetype-html"></i>员工管理
+                </a>
+                <ul>
+                    <li>
+                        <a href="list2.html">员工列表</a>
+                    </li>
+                    <li>
+                        <a href="add.html">新增员工</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:" class="has-children">
+                    <i class="bi bi-filetype-html"></i>出勤管理
+                </a>
+                <ul>
+                    <li>
+                        <a href="attendance.html">出勤列表</a>
+                    </li>
+                    <li>
+                        <a href="addAttendance.html">新增出勤</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:" class="has-children">
+                    <i class="bi bi-filetype-html"></i>请假管理
+                </a>
+                <ul>
+                    <li>
+                        <a href="leave.html">请假列表</a>
+                    </li>
+                    <li>
+                        <a href="addleave.html">批准假期</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:" class="has-children">
+                    <i class="bi bi-filetype-html"></i>部门管理
+                </a>
+                <ul>
+                    <li>
+                        <a href="department.html">部门列表</a>
+                    </li>
+                    <li>
+                        <a href="adddepartment.html">新增部门</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:" class="has-children">
+                    <i class="bi bi-filetype-html"></i>工资管理
+                </a>
+                <ul>
+                    <li>
+                        <a href="salary.html">工资列表</a>
+                    </li>
+                    <li>
+                        <a href="addsalary.html">发放工资</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:" class="has-children">
+                    <i class="bi bi-list-nested"></i>多级菜单
+                </a>
+                <ul>
+                    <li><a href="javascript:">一级菜单</a></li>
+                    <li>
+                        <a href="javascript:" class="has-children">一级菜单</a>
+                        <ul>
+                            <li><a href="javascript:">二级菜单</a></li>
+                            <li>
+                                <a href="javascript:" class="has-children">二级菜单</a>
+                                <ul>
+                                    <li><a href="javascript:">三级菜单</a></li>
+                                    <li>
+                                        <a href="javascript:" class="has-children">三级菜单</a>
+                                        <ul>
+                                            <li><a href="javascript:">四级菜单</a></li>
+                                            <li><a href="javascript:">四级菜单</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:" class="has-children">一级菜单</a>
+                        <ul>
+                            <li><a href="javascript:">二级菜单</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="bsa-main-wrapper">
+    <div class="bsa-main-content">
+        <!-- 内容都应该被包裹在此-->
+        <div class="card border-0 shadow-sm" id="app1">
+            <div class="card-body p-4">
+                <h5 class="card-title">添加员工</h5>
+                <form class="form-horizontal " role="form"  action="/aweb_war_exploded/DuserServlet?action=add" method="post" onsubmit="return chk()">
+                    <div class="form-group">
+                        <label for="sid" class="col-sm-2 control-label">工号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="sid" id="sid"  placeholder="请输入工号" onfocus="checksid()" onblur="checksid()">
+                            <div id="msg1" style="color: red;visibility: hidden">工号不能为空</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="name" id="name"  placeholder="请输入姓名" onfocus="checkname()" onblur="checkname()">
+                            <div id="msg10" style="color: red;visibility: hidden">姓名不能为空</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="spwd1" class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="spwd1" name="spwd1" placeholder="请输入密码">
+                            <div id="msg2" style="color: red;visibility: hidden">密码需要大于6位</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="spwd2" class="col-sm-2 control-label">确认密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="spwd2" name="spwd2" placeholder="请输入确认密码">
+                            <div id="msg3" style="color: red;visibility: hidden">两次密码不一致</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="age" class="col-sm-2 control-label">年龄</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="age" id="age"  placeholder="请输入年龄" onfocus="checkage()" onblur="checkage()">
+                            <div id="msg4" style="color: red;visibility: hidden">年龄不能为空</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sexRadio1" class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10">
+<!--                            <input type="text" class="form-control" name="sex" id="sex"  placeholder="请输入性别" onfocus="checksex()" onblur="checksex()">-->
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="sex" id="sexRadio1" value="先生"
+                                           checked>
+                                    <label class="form-check-label" for="sexRadio1">先生</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="sex" id="sexRadio2" value="女士">
+                                    <label class="form-check-label" for="sexRadio2">女士</label>
+                                </div>
+                            </div>
+                            <div id="msg5" style="color: red;visibility: hidden">性别不能为空</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="position" class="col-sm-2 control-label">职位</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="position" id="position"  placeholder="请输入职位">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="department" class="col-sm-2 control-label">部门</label>
+                        </div>
+                        <select name="department" id="department" style="width:150px;height: 30px">
+                            <option value=" " selected>请选择部门</option>
+                            <option v-for="(department,index) in department">{{department.department}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="salary" class="col-sm-2 control-label">薪水</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="salary" id="salary"  placeholder="请输入薪水">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tel" class="col-sm-2 control-label">电话号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="tel" id="tel"  placeholder="请输入电话号" onfocus="checktel()" onblur="checktel()">
+                            <div id="msg6" style="color: red;visibility: hidden">电话号不能为空</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">添加</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function chk() {
+        if (checkname()&&checkpwd()&&checkage()&&checksex()&&checktel()){
+            return true
+        }else {
+            return false
+        }
+    }
+    function checksid() {
+        var str=document.getElementById("sid").value;
+        if (str.length==0){
+            document.getElementById("msg1").style.visibility="visible";//显示
+            return false
+        }
+        else {
+            document.getElementById("msg1").style.visibility="hidden";//隐藏
+            return true
+        }
+    }
+    function checkname() {
+        var str=document.getElementById("name").value;
+        if (str.length==0){
+            document.getElementById("msg10").style.visibility="visible";//显示
+            return false
+        }
+        else {
+            document.getElementById("msg10").style.visibility="hidden";//隐藏
+            return true
+        }
+    }
+    function checkage() {
+        var str=document.getElementById("age").value;
+        if (str.length==0){
+            document.getElementById("msg4").style.visibility="visible";//显示
+            return false
+        }
+        else {
+            document.getElementById("msg4").style.visibility="hidden";//隐藏
+            return true
+        }
+    }
+    function checksex() {
+        var str=document.getElementById("sex").value;
+        if (str.length==0){
+            document.getElementById("msg5").style.visibility="visible";//显示
+            return false
+        }
+        else {
+            document.getElementById("msg5").style.visibility="hidden";//隐藏
+            return true
+        }
+    }
+    function checktel() {
+        var str=document.getElementById("tel").value;
+        if (str.length==0){
+            document.getElementById("msg6").style.visibility="visible";//显示
+            return false
+        }
+        else {
+            document.getElementById("msg6").style.visibility="hidden";//隐藏
+            return true
+        }
+    }
+    function checkpwd() {
+        var pwd1=document.getElementById("spwd1").value;
+        var pwd2=document.getElementById("spwd2").value;
+        if (pwd1.length>6){
+            document.getElementById("msg2").style.visibility="hidden";
+            if (pwd1!=pwd2){
+                document.getElementById("msg3").style.visibility="visible";//显示
+                return false
+            }
+            else {
+                document.getElementById("msg3").style.visibility="hidden";//隐藏
+                return true
+            }
+        }
+        else {
+            document.getElementById("msg2").style.visibility="visible";
+        }
+    }
+    function checkemail() {
+        var re=/^\w+@[0-9a-z]+\.[a-z]+$/;
+        var mail =document.getElementById("useremail");
+        if (re.test(mail.value)){
+            document.getElementById("msg4").style.visibility="hidden";
+            return true
+        }
+        else {
+            document.getElementById("msg4").style.visibility="visible";
+            return false
+        }
+    }
+</script>
+<script src="static/js/bootstrap.bundle.min.js"></script>
+<script src="static/js/bootstrap-admin.min.js"></script>
+<script src="lib/chart.js/dist/chart.min.js"></script>
+<script src="js/vuejs-2.5.16.js"></script>
+<script src="js/axios-0.18.0.js"></script>
+<script>
+    var vue=new Vue({
+        el:"#app1",//找容器
+        data:{
+            department:[],
+            departments:[],
+        },
+        methods:{
+            findBySid(){
+                // alert("哈哈，我是更新页面"+id);
+                //异步传输
+                axios.post("/aweb_war_exploded/DuserServlet?action=findAll").then(response=>{
+                    if (response.data.flag){
+                    }else {
+                        alert(response.data.errorMsg);
+                        location.href="login.html"
+                    }
+                })
+                axios.get("DuserServlet?action=findAlldepartment").then(response => {
+                    //response.data就是响应体的内容（json）
+                    if (response.data.flag) {//flag是ResultBean管理器管理类的里的flag
+                        //获取成功：进行赋值
+                        this.department = response.data.data;//最后一个data,是ResultBean管理器管理类的里的data
+                        this.departments = response.data.data;//最后一个data,是ResultBean管理器管理类的里的data
+                    } else {
+                        alert(response.data.errorMsg);//errorMsg是ResultBean管理器管理类的里的
+                        location.href = "index.html";
+                    }
+                })
+            },
+        },
+        created(){//勾子函数：用于自动执行
+            this.findBySid()
+        }
+    });
+</script>
+</body>
+</html>

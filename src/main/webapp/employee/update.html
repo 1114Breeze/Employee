@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="icon" href="../static/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="../static/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="stylesheet" href="../lib/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-admin.min.css">
+    <title>员工管理系统</title>
+</head>
+<body>
+
+<!--头部导航-->
+<ul class="bsa-header">
+    <!--   移动端侧边栏toggler(不可删除) -->
+    <li>
+        <div class="bsa-nav-item bsa-mobile-sidebar-toggler-item">
+            <i class="bi bi-list"></i>
+        </div>
+    </li>
+    <!--  搜索框表单部分  -->
+    <!--  空白占位符(可以让.bsa-header-item左右分布)   -->
+    <li class="bsa-spacer"></li>
+    <!--  移动端显示的搜索按钮(和搜索框是配套使用)      -->
+    <li>
+        <div class="bsa-nav-item bsa-mobile-search-toggler-item">
+            <i class="bi bi-search"></i>
+        </div>
+    </li>
+    <!--    用户信息    -->
+    <li class="dropdown">
+        <div class="bsa-nav-item" data-bs-toggle="dropdown" class="container" id="app1">
+            <div class="d-flex align-items-center mb-2">
+                <img src="https://temp.im/120x120" class="bsa-height-40 bsa-width-40 rounded-circle" alt="用户头像">
+                <div class="flex-shrink-0 ms-2 bsa-max-width-150 bsa-user-details">
+                    <div class="bsa-font-15 bsa-ellipsis">{{employee.name}}</div>
+                    <div class="bsa-font-13 bsa-ellipsis">{{employee.position}}</div>
+                </div>
+            </div>
+        </div>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="javascript:"><i class="bi bi-person me-2"></i>个人资料</a></li>
+            <li><a class="dropdown-item" href="javascript:"><i class="bi bi-gear me-2"></i>设置</a></li>
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+            <li><a href="/aweb_war_exploded/EmployeeServlet?action=loginout" ><i class="bi bi-box-arrow-right me-2"></i>退出登录</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+<!--侧边栏-->
+<div class="bsa-sidebar">
+    <div class="bsa-sidebar-header">
+        <img src="../static/images/logo-icon.png" class="bsa-logo-icon" alt="logo-icon">
+        <div class="bsa-logo-text">员工管理系统</div>
+    </div>
+    <div class="bsa-sidebar-body">
+        <ul class="bsa-menu">
+            <li>
+                <a href="announcement.html" class="active">
+                    <i class="bi bi-house"></i>公告
+                </a>
+            </li>
+            <li>
+                <a href="list.html">
+                    <i class="bi bi-filetype-html"></i>我的信息
+                </a>
+                <ul>
+                    <li>
+                        <a href="list.html">我的信息</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="salary.html">
+                    <i class="bi bi-filetype-html"></i>我的工资
+                </a>
+                <ul>
+                    <li>
+                        <a href="salary.html">工资信息</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="attendance.html">
+                    <i class="bi bi-filetype-html"></i>出勤信息
+                </a>
+                <ul>
+                    <li>
+                        <a href="attendance.html">出勤信息</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:" class="has-children">
+                    <i class="bi bi-filetype-html"></i>请假管理
+                </a>
+                <ul>
+                    <li>
+                        <a href="leave.html">我的请假</a>
+                    </li>
+                    <li>
+                        <a href="leaveapply.html">请假申请</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:" class="has-children">
+                    <i class="bi bi-list-nested"></i>多级菜单
+                </a>
+                <ul>
+                    <li><a href="javascript:">一级菜单</a></li>
+                    <li>
+                        <a href="javascript:" class="has-children">一级菜单</a>
+                        <ul>
+                            <li><a href="javascript:">二级菜单</a></li>
+                            <li>
+                                <a href="javascript:" class="has-children">二级菜单</a>
+                                <ul>
+                                    <li><a href="javascript:">三级菜单</a></li>
+                                    <li>
+                                        <a href="javascript:" class="has-children">三级菜单</a>
+                                        <ul>
+                                            <li><a href="javascript:">四级菜单</a></li>
+                                            <li><a href="javascript:">四级菜单</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:" class="has-children">一级菜单</a>
+                        <ul>
+                            <li><a href="javascript:">二级菜单</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="bsa-main-wrapper">
+    <div class="bsa-main-content">
+        <!-- 内容都应该被包裹在此-->
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <div class="container" id="app">
+                    <table class="table container">
+                        <tr>
+                            <td align="rigth">姓名：</td>
+                            <td><input type="text" id="name" name="name" size="30"  v-model="employees.name"></td>
+                            <td align="left"><div id="msg10" style="color: red;visibility: hidden">姓名不能为空</div></td>
+                        </tr>
+                        <tr>
+                            <td align="rigth">工号：</td>
+                            <td><input type="text" value="disabled" disabled="true" id="sid" name="name" size="30"  v-model="employees.sid"></td>
+                            <td align="left"><div id="msg1" style="color: red;visibility: hidden">工号不能为空</div></td>
+                        </tr>
+                        <tr>
+                            <td align="rigth">年龄：</td>
+                            <td><input type="text" id="age" name="age" size="30"  v-model="employees.age"></td>
+                            <td align="left"><div id="msg4" style="color: red;visibility: hidden">年龄不能为空</div></td>
+                        </tr>
+                        <tr>
+                            <td align="rigth">性别：</td>
+                            <td>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" v-model="employees.sex" type="radio" name="sex" id="sexRadio1" value="先生"
+                                               checked>
+                                        <label class="form-check-label" for="sexRadio1">先生</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" v-model="employees.sex" type="radio" name="sex" id="sexRadio2" value="女士">
+                                        <label class="form-check-label" for="sexRadio2">女士</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td align="left"><div id="msg5" style="color: red;visibility: hidden">性别不能为空</div></td>
+                        </tr>
+                        <tr>
+                            <td align="rigth">电话号：</td>
+                            <td><input type="text" id="tel" name="tel" size="30"  v-model="employees.tel"></td>
+                            <td align="left"><div id="msg6" style="color: red;visibility: hidden">电话号不能为空</div></td>
+                        </tr>
+<!--                        <tr>-->
+<!--                            <td align="rigth">职位：</td>-->
+<!--                            <td><input type="text" value="disabled" disabled="true" id="position" name="position" size="30"  v-model="employees.position"></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td align="rigth">部门：</td>-->
+<!--                            <td><input type="text" value="disabled" disabled="true" id="department" name="department" size="30"  v-model="employees.department"></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td align="rigth">薪水：</td>-->
+<!--                            <td><input type="text" value="disabled" disabled="true" id="salary" name="salary" size="30"  v-model="employees.salary"></td>-->
+<!--                        </tr>-->
+                        <tr>
+                            <td align="rigth">密码：</td>
+                            <td><input type="text" id="spwd1" name="spwd1" size="30" v-model="employees.spwd" placeholder="请输入密码"></td>
+                            <td align="left"><div id="msg2" style="color: red;visibility: hidden">密码不能为空</div></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="center">
+                                <!--隐藏域绑定id-->
+                                <input type="hidden" name="id"  v-model="employees.u_id">
+                                <input type="submit" class="btn btn-primary" value="保存" @click="updateEmployees()">
+                                <input type="reset" class="btn btn-default" value="重置">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-2.1.0.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/vuejs-2.5.16.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+<script src="../js/getParameter.js"></script>
+<script src="../static/js/bootstrap.bundle.min.js"></script>
+<script src="../static/js/bootstrap-admin.min.js"></script>
+<script src="../lib/chart.js/dist/chart.min.js"></script>
+<script>
+    var vue=new Vue({
+        el:"#app",
+        data:{
+            employees:{}
+        },
+        methods:{
+            findByid(){
+                //取id值：取list页输入id值
+                var id=getParameter("id");
+                // alert("哈哈，我是更新页面"+id);
+                //异步传输
+                axios.post("/aweb_war_exploded/DuserServlet?action=findById&id="+id).then(response=>{
+                    if (response.data.flag){
+                    this.employees=response.data.data;
+                }else {
+                    alert(response.data.errorMsg);
+                }
+            })
+            },
+            //更新
+            updateEmployees(){
+                //发送异步请求
+                axios.post("/aweb_war_exploded/EmployeeServlet?action=update",this.employees).then(response=>{
+                    if (response.data.flag){
+                    alert(response.data.errorMsg);
+                    //修改成功:重新定向到list页
+                    location.href="list.html";
+                }else {
+                    alert(response.data.errorMsg);
+                }
+            })
+            }
+        },
+        created(){
+            this.findByid();
+        }
+    });
+</script>
+<script>
+    var vue=new Vue({
+        el:"#app1",//找容器
+        data:{
+            //数据源
+            employee:[],
+        },
+        methods:{
+            findBySid(){
+                // alert("哈哈，我是更新页面"+id);
+                //异步传输
+                axios.post("/aweb_war_exploded/EmployeeServlet?action=findBySid").then(response=>{
+                    if (response.data.flag){
+                        this.employee=response.data.data;
+                    }else {
+                        alert(response.data.errorMsg);
+                        location.href="login.html"
+                    }
+                })
+            },
+        },
+        created(){//勾子函数：用于自动执行
+            this.findBySid()
+        }
+    });
+</script>
+</body>
+</html>

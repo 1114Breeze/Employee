@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人资料</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/vuejs-2.5.16.js"></script>
+    <script src="js/axios-0.18.0.js"></script>
+    <script src="js/getParameter.js"></script>
+</head>
+<body>
+<div id="app">
+    <table class="table container">
+        <tr>
+            <td align="rigth">用户名：</td>
+            <td><input type="text" id="name" name="name" size="30"  v-model="employees.name"></td>
+            <td align="left"><div id="msg10" style="color: red;visibility: hidden">姓名不能为空</div></td>
+        </tr>
+        <tr>
+            <td align="rigth">密码：</td>
+            <td><input type="text" id="sid" name="name" size="30"  v-model="employees.sid"></td>
+            <td align="left"><div id="msg1" style="color: red;visibility: hidden">工号不能为空</div></td>
+        </tr>
+        <tr>
+            <td align="rigth">邮箱：</td>
+            <td><input type="text" id="age" name="age" size="30"  v-model="employees.age"></td>
+            <td align="left"><div id="msg4" style="color: red;visibility: hidden">年龄不能为空</div></td>
+        </tr>
+        <tr>
+            <td align="rigth">密码：</td>
+            <td><input type="text" id="spwd1" name="spwd1" size="30" v-model="employees.spwd"></td>
+            <td align="left"><div id="msg2" style="color: red;visibility: hidden">密码不能为空</div></td>
+        </tr>
+        <tr>
+            <td align="rigth">确认密码：</td>
+            <td><input type="text" id="spwd2" name="spwd2" size="30" placeholder="请输入确认密码"></td>
+            <td align="left"><div id="msg3" style="color: #ff0000;visibility: hidden">确认密码不一置</div></td>
+        </tr>
+        <tr>
+            <td colspan="3" align="center">
+                <!--隐藏域绑定id-->
+                <input type="hidden" name="id"  v-model="employees.u_id">
+                <input type="submit" class="btn btn-primary" value="更新" @click="updateEmployees()">
+                <input type="reset" class="btn btn-default" value="重置">
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+    var vue=new Vue({
+        el:"#app",
+        data:{
+            employees:{}
+        },
+        methods:{
+            findByid(){
+                //取id值：取list页输入id值
+                var id=getParameter("id");
+                // alert("哈哈，我是更新页面"+id);
+                //异步传输
+                axios.post("DuserServlet?action=findById&id="+id).then(response=>{
+                    if (response.data.flag){
+                        this.employees=response.data.data;
+                    }else {
+                        alert(response.data.errorMsg);
+                    }
+                })
+            },
+            //更新
+            updateEmployees(){
+                //发送异步请求
+                axios.post("DuserServlet?action=update",this.employees).then(response=>{
+                    if (response.data.flag){
+                        //修改成功:重新定向到list页
+                        location.href="list2.html";
+                    }else {
+                        alert(response.data.errorMsg);
+                    }
+                })
+            }
+        },
+        created(){
+            this.findByid();
+        }
+    });
+</script>
+</body>
+</html>
